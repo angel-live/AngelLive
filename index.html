@@ -1,1 +1,477 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angel Live — 女性限定ライバー事務所</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@200;300;400&family=Noto+Serif+JP:wght@200;300&family=DM+Serif+Display:ital@0;1&family=Sacramento&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --rose:#9B5E52;--rose-light:#C4907F;--rose-pale:#F2EBE8;
+  --cream:#FAF8F5;--white:#FFFFFF;--ink:#1A1512;--mid:#9A948E;
+  --border:rgba(155,94,82,0.15);--border-soft:rgba(155,94,82,0.08);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--ink);font-family:'Noto Sans JP',sans-serif;font-weight:300;overflow-x:hidden;}
+@media(hover:hover){body{cursor:none;}#cur,#cur-r{display:block;}}
+#cur{display:none;position:fixed;width:6px;height:6px;background:var(--rose);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cur-r{display:none;position:fixed;width:32px;height:32px;border:1px solid var(--rose);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.5;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 4rem;transition:background .5s,border-color .5s;border-bottom:1px solid transparent;}
+nav.scrolled{background:rgba(255,255,255,0.93);backdrop-filter:blur(14px);border-bottom-color:var(--border-soft);}
+.nav-logo{font-family:'Sacramento',cursive;font-size:1.8rem;letter-spacing:.04em;color:var(--white);transition:color .3s;line-height:1;}
+nav.scrolled .nav-logo{color:var(--ink);}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-size:.62rem;letter-spacing:.18em;color:rgba(255,255,255,.75);text-decoration:none;transition:color .2s;}
+nav.scrolled .nav-links a{color:var(--mid);}
+.nav-links a:hover{color:var(--rose);}
+.nav-cta{font-size:.6rem;letter-spacing:.18em;padding:.65rem 1.6rem;border:1px solid rgba(255,255,255,.6);color:var(--white);background:none;cursor:pointer;transition:all .25s;font-family:'Noto Sans JP',sans-serif;font-weight:300;white-space:nowrap;}
+nav.scrolled .nav-cta{border-color:var(--rose);color:var(--rose);}
+.nav-cta:hover{background:var(--rose);color:var(--white);border-color:var(--rose);}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:101;}
+.hamburger span{width:22px;height:1px;background:var(--white);transition:all .3s;display:block;}
+nav.scrolled .hamburger span{background:var(--ink);}
+.hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+.mobile-menu{position:fixed;inset:0;background:rgba(250,248,245,.97);backdrop-filter:blur(16px);z-index:90;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;transform:translateY(-100%);transition:transform .5s cubic-bezier(.16,1,.3,1);}
+.mobile-menu.open{transform:translateY(0);}
+.mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;letter-spacing:.08em;color:var(--ink);text-decoration:none;transition:color .2s;}
+.mobile-menu a:hover{color:var(--rose);}
+.mobile-menu-cta{font-size:.7rem;letter-spacing:.2em;padding:1rem 3rem;border:1px solid var(--rose);color:var(--rose);background:none;font-family:'Noto Sans JP',sans-serif;cursor:pointer;margin-top:.5rem;}
+#hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:flex-end;}
+.hero-img{position:absolute;inset:0;}
+.hero-img img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(15,8,6,.62) 0%,rgba(15,8,6,.28) 55%,rgba(15,8,6,.08) 100%);}
+.hero-overlay-bottom{position:absolute;bottom:0;left:0;right:0;height:45%;background:linear-gradient(to top,rgba(15,8,6,.6),transparent);}
+.hero-content{position:relative;z-index:2;padding:0 4rem 5.5rem;max-width:700px;}
+.hero-eyebrow{font-size:.56rem;letter-spacing:.5em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:1.8rem;opacity:0;animation:fadeUp .8s .3s forwards;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,8vw,7.5rem);font-weight:300;line-height:.93;letter-spacing:-.01em;margin-bottom:1.8rem;color:var(--white);}
+.hero-title .line{overflow:hidden;display:block;}
+.hero-title .line span{display:block;transform:translateY(105%);animation:slideUp .9s cubic-bezier(.16,1,.3,1) forwards;}
+.hero-title .line:nth-child(1) span{animation-delay:.4s;}
+.hero-title .line:nth-child(2) span{animation-delay:.55s;font-style:italic;}
+.hero-title .line:nth-child(3) span{animation-delay:.7s;color:rgba(255,195,175,.9);}
+.hero-desc{font-size:.78rem;font-weight:200;color:rgba(255,255,255,.68);line-height:2.3;letter-spacing:.08em;margin-bottom:2.2rem;opacity:0;animation:fadeUp .8s 1s forwards;}
+.hero-btns{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;opacity:0;animation:fadeUp .8s 1.2s forwards;}
+.btn-rose{font-size:.6rem;letter-spacing:.2em;padding:.9rem 2.3rem;background:var(--rose);color:var(--white);border:none;cursor:pointer;font-family:'Noto Sans JP',sans-serif;font-weight:300;transition:background .25s,transform .2s;}
+.btn-rose:hover{background:var(--rose-light);transform:scale(1.03);}
+.btn-ghost-white{font-size:.6rem;letter-spacing:.2em;color:rgba(255,255,255,.8);background:none;border:1px solid rgba(255,255,255,.38);padding:.9rem 2rem;cursor:pointer;font-family:'Noto Sans JP',sans-serif;font-weight:300;transition:all .2s;}
+.btn-ghost-white:hover{border-color:rgba(255,255,255,.85);color:var(--white);}
+.hero-scroll{position:absolute;right:3.5rem;bottom:3rem;writing-mode:vertical-rl;font-size:.5rem;letter-spacing:.3em;color:rgba(255,255,255,.38);display:flex;align-items:center;gap:.8rem;opacity:0;animation:fadeUp .8s 1.6s forwards;}
+.hero-scroll::after{content:'';width:1px;height:2.5rem;background:rgba(255,255,255,.28);}
+#campaign{background:var(--ink);padding:5rem 4rem;position:relative;overflow:hidden;}
+#campaign::before{content:'CAMPAIGN';position:absolute;font-family:'Cormorant Garamond',serif;font-size:15vw;font-weight:300;font-style:italic;color:rgba(255,255,255,.025);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;}
+.campaign-wrap{display:grid;grid-template-columns:120px 1fr auto;align-items:center;gap:4rem;max-width:1100px;margin:0 auto;}
+.campaign-ring{width:110px;height:110px;border:1px solid rgba(201,160,127,.3);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;flex-shrink:0;}
+.campaign-ring-en{font-size:.46rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(201,160,127,.55);}
+.campaign-ring-date{font-family:'DM Serif Display',serif;font-size:1.05rem;font-weight:400;color:#C9A07F;letter-spacing:.05em;line-height:1.4;text-align:center;}
+.campaign-tag{font-size:.54rem;letter-spacing:.4em;text-transform:uppercase;color:#C9A07F;opacity:.65;margin-bottom:.9rem;display:block;}
+.campaign-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,2.5vw,2.2rem);font-weight:300;color:var(--white);line-height:1.3;margin-bottom:.8rem;letter-spacing:.05em;}
+.campaign-title em{font-style:italic;color:#C9A07F;}
+.campaign-desc{font-size:.72rem;font-weight:200;color:rgba(255,255,255,.4);line-height:2;letter-spacing:.06em;margin-bottom:1.5rem;}
+.campaign-cd{display:flex;gap:1.5rem;}
+.cd-unit{text-align:center;}
+.cd-num{font-family:'DM Serif Display',serif;font-size:2rem;font-weight:400;color:var(--white);line-height:1;display:block;letter-spacing:.02em;}
+.cd-lbl{font-size:.44rem;letter-spacing:.2em;color:rgba(255,255,255,.25);text-transform:uppercase;margin-top:2px;display:block;}
+.campaign-btn{font-size:.58rem;letter-spacing:.2em;padding:1rem 2.2rem;background:none;border:1px solid rgba(201,160,127,.4);color:#C9A07F;cursor:pointer;font-family:'Noto Sans JP',sans-serif;font-weight:300;white-space:nowrap;transition:all .25s;align-self:center;}
+.campaign-btn:hover{background:#C9A07F;color:var(--ink);}
+#about{padding:9rem 4rem;background:var(--white);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.sec-label{font-size:.56rem;letter-spacing:.4em;text-transform:uppercase;color:var(--rose);margin-bottom:1.3rem;display:block;}
+.about-big{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:300;line-height:.95;margin-bottom:1.8rem;}
+.about-big em{font-style:italic;color:var(--rose);}
+.about-body{font-size:.8rem;font-weight:200;color:var(--mid);line-height:2.3;letter-spacing:.06em;}
+.about-right{display:flex;flex-direction:column;gap:2.5rem;}
+.about-stat{border-left:2px solid var(--rose-pale);padding-left:1.8rem;}
+.about-stat-num{font-family:'DM Serif Display',serif;font-size:3rem;font-weight:400;color:var(--rose);line-height:1;letter-spacing:.01em;}
+.about-stat-unit{font-size:1rem;}
+.about-stat-label{font-size:.68rem;font-weight:200;color:var(--mid);letter-spacing:.1em;margin-top:.3rem;}
+.marquee-wrap{overflow:hidden;padding:1.5rem 0;background:var(--rose-pale);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.marquee-track{display:flex;animation:marquee 22s linear infinite;white-space:nowrap;}
+.marquee-item{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;font-style:italic;color:var(--rose);padding:0 2.5rem;letter-spacing:.1em;display:flex;align-items:center;gap:2.5rem;}
+.marquee-dot{width:4px;height:4px;background:var(--rose-light);border-radius:50%;flex-shrink:0;}
+#services{padding:9rem 4rem;background:var(--cream);}
+.sec-head{margin-bottom:5rem;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6vw,4.5rem);font-weight:300;line-height:.95;margin-top:.5rem;}
+.sec-title em{font-style:italic;color:var(--rose);}
+.sec-sub{font-size:.78rem;font-weight:200;color:var(--mid);line-height:2.3;letter-spacing:.06em;margin-top:1.2rem;}
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border);border-left:1px solid var(--border);}
+.svc-card{border-right:1px solid var(--border);border-bottom:1px solid var(--border);padding:2.8rem 2.5rem 3rem;position:relative;overflow:hidden;background:var(--white);transition:background .3s;}
+.svc-card:hover{background:var(--rose-pale);}
+.svc-card.full{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.svc-num{position:absolute;right:1.2rem;bottom:.8rem;font-family:'DM Serif Display',serif;font-size:5rem;font-weight:400;color:var(--rose);opacity:.08;line-height:1;transition:opacity .3s;pointer-events:none;}
+.svc-card:hover .svc-num{opacity:.16;}
+.svc-en{font-size:.52rem;letter-spacing:.35em;text-transform:uppercase;color:var(--rose);opacity:.7;margin-bottom:.8rem;display:block;}
+.svc-title{font-family:'Noto Serif JP',serif;font-size:1.1rem;font-weight:200;letter-spacing:.04em;margin-bottom:.9rem;color:var(--ink);}
+.svc-body{font-size:.73rem;font-weight:200;color:var(--mid);line-height:2.1;letter-spacing:.04em;}
+#faq{padding:9rem 4rem;background:var(--white);}
+.faq-layout{display:grid;grid-template-columns:1fr 1.6fr;gap:6rem;align-items:start;}
+.faq-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:300;line-height:1.1;margin-top:.5rem;}
+.faq-title em{font-style:italic;color:var(--rose);display:block;}
+.faq-list{border-top:1px solid var(--border);}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 0;cursor:pointer;gap:1.5rem;}
+.faq-ql{font-family:'Cormorant Garamond',serif;font-size:.82rem;font-style:italic;color:var(--rose);opacity:.7;flex-shrink:0;}
+.faq-qt{font-size:.8rem;font-weight:300;letter-spacing:.06em;color:var(--ink);line-height:1.6;flex:1;}
+.faq-tog{width:26px;height:26px;border:1px solid var(--border);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--rose);font-size:.9rem;transition:transform .4s,border-color .3s;}
+.faq-item.open .faq-tog{transform:rotate(45deg);border-color:var(--rose);}
+.faq-ans{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1);}
+.faq-item.open .faq-ans{max-height:200px;}
+.faq-ans-in{padding:0 0 1.8rem 2rem;font-size:.75rem;font-weight:200;color:var(--mid);line-height:2.2;letter-spacing:.05em;}
+#cta{padding:9rem 4rem;background:var(--rose);text-align:center;position:relative;overflow:hidden;}
+#cta::before{content:'Angel Live';position:absolute;font-family:'Cormorant Garamond',serif;font-size:18vw;font-weight:300;font-style:italic;color:rgba(255,255,255,.06);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;}
+.cta-tag{font-size:.56rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:1.5rem;display:block;}
+.cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,6vw,4.5rem);font-weight:300;font-style:italic;color:var(--white);line-height:1.15;margin-bottom:2rem;}
+.cta-sub{font-size:.78rem;font-weight:200;color:rgba(255,255,255,.65);line-height:2.3;letter-spacing:.08em;margin-bottom:2.5rem;}
+.btn-white{font-size:.6rem;letter-spacing:.25em;padding:1.1rem 3rem;background:var(--white);color:var(--rose);border:none;cursor:pointer;font-family:'Noto Sans JP',sans-serif;font-weight:400;transition:transform .2s;}
+.btn-white:hover{transform:scale(1.04);}
+footer{padding:3rem 4rem;background:var(--ink);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.foot-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;letter-spacing:.25em;color:rgba(255,255,255,.22);}
+.foot-links{display:flex;gap:2rem;flex-wrap:wrap;}
+.foot-links a{font-size:.58rem;letter-spacing:.1em;color:rgba(255,255,255,.2);text-decoration:none;transition:color .2s;}
+.foot-links a:hover{color:rgba(255,255,255,.5);}
+.foot-copy{font-size:.58rem;color:rgba(255,255,255,.16);letter-spacing:.08em;}
+.r{opacity:0;transform:translateY(24px);transition:opacity .85s,transform .85s;}
+.r.vis{opacity:1;transform:translateY(0);}
+.rl{opacity:0;transform:translateX(-30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
+.rl.vis{opacity:1;transform:translateX(0);}
+.rr{opacity:0;transform:translateX(30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
+.rr.vis{opacity:1;transform:translateX(0);}
+@keyframes slideUp{to{transform:translateY(0);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem;}.nav-links,.nav-cta{display:none;}.hamburger{display:flex;}
+  .hero-content{padding:0 1.5rem 5rem;max-width:100%;}.hero-scroll{display:none;}
+  #campaign{padding:3.5rem 1.5rem;}.campaign-wrap{grid-template-columns:1fr;gap:2rem;text-align:center;}.campaign-ring{display:none;}.campaign-cd{justify-content:center;}.campaign-btn{width:100%;margin-top:.5rem;}
+  #about{padding:5rem 1.5rem;grid-template-columns:1fr;gap:3rem;}.about-right{flex-direction:row;flex-wrap:wrap;gap:1.5rem;}.about-stat{flex:1;min-width:110px;}
+  #services{padding:5rem 1.5rem;}.svc-grid{grid-template-columns:1fr;}.svc-card.full{grid-column:auto;grid-template-columns:1fr;}
+  #faq{padding:5rem 1.5rem;}.faq-layout{grid-template-columns:1fr;gap:2.5rem;}
+  #cta{padding:5rem 1.5rem;}
+  footer{padding:2rem 1.5rem;flex-direction:column;align-items:flex-start;gap:.8rem;}
+}
+@media(max-width:480px){
+  .hero-btns{flex-direction:column;align-items:stretch;}.btn-rose,.btn-ghost-white{text-align:center;}
+  .about-right{flex-direction:column;}
+}
 
+/* ── LOADER ── */
+#loader{position:fixed;inset:0;z-index:9000;background:#FAF8F5;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;transition:opacity .8s ease, visibility .8s ease;}
+#loader.hide{opacity:0;visibility:hidden;pointer-events:none;}
+.loader-logo{font-family:'Sacramento',cursive;font-size:clamp(3.5rem,9vw,6.5rem);color:#9B5E52;opacity:0;transform:translateY(20px);animation:loaderFadeUp 1s .2s forwards;letter-spacing:.02em;text-shadow:0 4px 20px rgba(155,94,82,.28);}
+.loader-tagline{font-family:'Noto Sans JP',sans-serif;font-size:.6rem;letter-spacing:.45em;text-transform:uppercase;color:#C4907F;opacity:0;animation:loaderFadeUp .8s .8s forwards;}
+.loader-bar-wrap{width:160px;height:1px;background:rgba(155,94,82,.15);overflow:hidden;opacity:0;animation:loaderFadeUp .6s .6s forwards;}
+.loader-bar{height:100%;width:0;background:var(--rose);animation:loaderBar 1.6s .4s cubic-bezier(.4,0,.2,1) forwards;}
+@keyframes loaderFadeUp{to{opacity:1;transform:translateY(0);}}
+@keyframes loaderBar{to{width:100%;}}
+
+/* ── HERO CATCHCOPY (ラグジュアリー版) ── */
+.hero-catchcopy{
+  position:absolute;
+  z-index:3;
+  bottom:8rem;
+  right:4rem;
+  text-align:right;
+  pointer-events:none;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:.9rem;
+}
+
+/* 上段: 細い英字ルビ */
+.hcc-ruby{
+  font-family:'Cormorant Garamond',serif;
+  font-size:.58rem;
+  font-style:italic;
+  letter-spacing:.45em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.38);
+  display:block;
+}
+
+/* 中段: メイン日本語 — 縦組み風の大きな明朝体 */
+.hcc-main{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:.1rem;
+}
+.hcc-main-line{
+  font-family:'Noto Serif JP', 'Noto Sans JP', serif;
+  font-weight:200;
+  color:var(--white);
+  line-height:1.1;
+  display:block;
+  letter-spacing:.22em;
+  opacity:.92;
+}
+.hcc-main-line.lg{
+  font-size:clamp(1.6rem,3.8vw,3.2rem);
+  letter-spacing:.18em;
+  text-shadow:0 2px 30px rgba(0,0,0,.25);
+}
+.hcc-main-line.sm{
+  font-size:clamp(.85rem,1.8vw,1.45rem);
+  color:rgba(255,255,255,.55);
+  letter-spacing:.32em;
+}
+
+/* 下段: ゴールドのルール線 + キャプション */
+.hcc-foot{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+}
+.hcc-rule{
+  width:40px;
+  height:1px;
+  background:rgba(255,255,255,.3);
+  display:block;
+}
+.hcc-cap{
+  font-family:'Cormorant Garamond',serif;
+  font-size:.5rem;
+  letter-spacing:.3em;
+  color:rgba(255,255,255,.3);
+  font-style:italic;
+}
+
+/* アニメ */
+.hero-catchcopy.anim .hcc-ruby{animation:ccFade .7s .2s forwards;}
+.hero-catchcopy.anim .hcc-main-line:nth-child(1){animation:ccSlide .8s .35s cubic-bezier(.16,1,.3,1) forwards;}
+.hero-catchcopy.anim .hcc-main-line:nth-child(2){animation:ccSlide .8s .5s cubic-bezier(.16,1,.3,1) forwards;}
+.hero-catchcopy.anim .hcc-foot{animation:ccFade .7s .8s forwards;}
+.hcc-ruby,.hcc-main-line,.hcc-foot{opacity:0;}
+@keyframes ccFade{to{opacity:1;}from{opacity:0;transform:translateY(6px);}}
+@keyframes ccSlide{to{opacity:.92;transform:translateX(0);}from{opacity:0;transform:translateX(16px);}}
+
+@media(max-width:768px){
+  .hero-catchcopy{bottom:6rem;right:1.5rem;}
+  .hcc-main-line.lg{font-size:clamp(1.3rem,6vw,2rem);}
+  .hcc-main-line.sm{font-size:clamp(.72rem,3vw,1rem);}
+}
+
+/* ── HERO 追加装飾ライン ── */
+.hero-deco-line{position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,transparent,var(--rose) 30%,var(--rose-light) 70%,transparent);opacity:0;animation:fadeUp 1s 2.2s forwards;}
+
+@media(max-width:768px){
+  .hero-catchcopy{bottom:7rem;right:1.5rem;}
+  .hero-catch-hand{font-size:clamp(1.8rem,7vw,2.8rem);}
+}
+
+/* PICKUP */
+#pickup{padding:8rem 0 8rem 4rem;background:var(--cream);overflow:hidden;}
+.pk-head{padding-right:4rem;margin-bottom:3.5rem;display:flex;justify-content:space-between;align-items:flex-end;}
+.pk-tag{font-size:.56rem;letter-spacing:.4em;text-transform:uppercase;color:var(--rose);margin-bottom:.8rem;display:block;}
+.pk-h{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.5rem);font-weight:300;line-height:1;}
+.pk-h em{font-style:italic;color:var(--rose);}
+.pk-desc{font-size:.7rem;font-weight:200;color:var(--mid);letter-spacing:.08em;max-width:260px;line-height:2;text-align:right;}
+.pk-scroll{display:flex;gap:1.2rem;padding-right:4rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.pk-scroll::-webkit-scrollbar{display:none;}
+.pk-card{flex-shrink:0;position:relative;overflow:hidden;}
+.pk-card:nth-child(odd){width:230px;height:320px;}
+.pk-card:nth-child(even){width:195px;height:275px;margin-top:2.5rem;}
+.pk-card img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .6s cubic-bezier(.4,0,.2,1);}
+.pk-card:hover img{transform:scale(1.05);}
+.pk-card-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,8,6,.68) 0%,transparent 55%);opacity:0;transition:opacity .35s;}
+.pk-card:hover .pk-card-ov{opacity:1;}
+@media(max-width:768px){
+  #pickup{padding:5rem 0 5rem 1.5rem;}
+  .pk-head{padding-right:1.5rem;flex-direction:column;align-items:flex-start;gap:.8rem;}
+  .pk-desc{text-align:left;max-width:100%;}
+  .pk-scroll{padding-right:1.5rem;}
+  .pk-card:nth-child(odd){width:170px;height:240px;}
+  .pk-card:nth-child(even){width:150px;height:210px;margin-top:2rem;}
+}
+
+/* HERO 手書きタイトル */
+.hero-hand-title{
+  font-family:'Sacramento',cursive;
+  font-size:clamp(3.8rem,9vw,8.5rem);
+  color:var(--white);
+  line-height:.95;
+  display:block;
+  margin-bottom:1.2rem;
+  letter-spacing:.01em;
+  text-shadow:
+    0 3px 12px rgba(0,0,0,.4),
+    0 12px 40px rgba(0,0,0,.2),
+    3px 6px 0 rgba(100,35,25,.2);
+  opacity:0;
+  animation:fu .9s .55s forwards;
+}
+.hero-hand-title .ht-sub{
+  font-size:.42em;
+  color:rgba(255,210,185,.85);
+  letter-spacing:.12em;
+  display:block;
+  margin-bottom:.15em;
+  text-shadow:0 2px 8px rgba(0,0,0,.3);
+}
+.hero-hand-title .ht-main{
+  display:block;
+  text-shadow:
+    0 4px 16px rgba(0,0,0,.45),
+    0 0 50px rgba(200,120,100,.2),
+    4px 7px 0 rgba(80,25,18,.22);
+}
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="loader-logo">Angel Live</div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <p class="loader-tagline">Women's Live Streamer Agency</p>
+</div>
+<div id="cur"></div><div id="cur-r"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">Angel Liveについて</a>
+  <a href="#services" onclick="closeMenu()">サポート内容</a>
+  <a href="#faq" onclick="closeMenu()">よくある質問</a>
+  <a href="https://lin.ee/ONecpoi" target="_blank" class="mobile-menu-cta" style="text-decoration:none;display:inline-block;" onclick="closeMenu()">応募はこちらから</a>
+</div>
+<nav id="nav">
+  <div class="nav-logo">Angel Live</div>
+  <ul class="nav-links">
+    <li><a href="#about">Angel Liveについて</a></li>
+    <li><a href="#services">サポート内容</a></li>
+    <li><a href="#faq">よくある質問</a></li>
+  </ul>
+  <a href="https://lin.ee/ONecpoi" target="_blank" class="nav-cta" style="text-decoration:none;display:inline-block;">応募はこちらから</a>
+  <button class="hamburger" id="ham"><span></span><span></span><span></span></button>
+</nav>
+<section id="hero">
+  <div class="hero-img"><img src="images/hero.jpg" alt="Angel Live"></div>
+  <div class="hero-overlay"></div><div class="hero-overlay-bottom"></div>
+  <div class="hero-content">
+    
+    
+    
+    
+  </div>
+    <div class="hero-catchcopy" id="heroCatch">
+    <span class="hcc-ruby">Exclusively for Women</span>
+    <div class="hcc-main">
+      <span class="hcc-main-line sm">女性に特化した</span>
+      <span class="hcc-main-line lg">事 務 所</span>
+    </div>
+    <div class="hcc-foot">
+      <span class="hcc-rule"></span>
+      <span class="hcc-cap">Angel Live — TikTok Live Agency</span>
+    </div>
+  </div>
+  <div class="hero-deco-line"></div>
+<p class="hero-scroll">SCROLL</p>
+</section>
+<section id="campaign" class="r">
+  <div class="campaign-wrap">
+    <div class="campaign-ring"><span class="campaign-ring-en">Campaign</span><div class="campaign-ring-date">6/1<br>〜<br>6/30</div></div>
+    <div class="campaign-main">
+      <span class="campaign-tag">— 期間限定キャンペーン</span>
+      <h2 class="campaign-title">6月<em>所属キャンペーン</em></h2>
+      <p class="campaign-desc">2025年6月1日〜6月30日の間にご入所いただいた方限定で、<br>特典として美容品プレゼントをご用意しています。<br>詳細は面談にてご説明いたします。</p>
+      <div class="campaign-cd">
+        <div class="cd-unit"><span class="cd-num" id="cdD">--</span><span class="cd-lbl">Days</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cdH">--</span><span class="cd-lbl">Hours</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cdM">--</span><span class="cd-lbl">Min</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cdS">--</span><span class="cd-lbl">Sec</span></div>
+      </div>
+    </div>
+    <a href="https://lin.ee/ONecpoi" target="_blank" class="campaign-btn" style="text-decoration:none;display:inline-block;">今すぐ応募する →</a>
+  </div>
+</section>
+<section id="about">
+  <div class="rl"><span class="sec-label">— Angel Liveについて</span><h2 class="about-big">女性限定<br><em>ライバー</em><br>事務所</h2><p class="about-body">Angel Liveは、女性に特化したTikTok公認ライバー事務所です。あなたの配信活動を、専属チームが全力でサポートします。</p></div>
+  <div class="about-right rr">
+    <div class="about-stat r" style="transition-delay:.1s"><div class="about-stat-num">100<span class="about-stat-unit">%</span></div><div class="about-stat-label">報酬還元率</div></div>
+    <div class="about-stat r" style="transition-delay:.22s"><div class="about-stat-num">24<span class="about-stat-unit">H</span></div><div class="about-stat-label">サポート対応</div></div>
+    <div class="about-stat r" style="transition-delay:.34s"><div class="about-stat-num">0<span class="about-stat-unit">円</span></div><div class="about-stat-label">初期費用・月会費</div></div>
+  </div>
+</section>
+<div class="marquee-wrap"><div class="marquee-track"><div class="marquee-item">Angel Live<span class="marquee-dot"></span>女性限定<span class="marquee-dot"></span>専属サポート<span class="marquee-dot"></span>報酬還元率100%<span class="marquee-dot"></span>TikTok Live<span class="marquee-dot"></span>安心・安全<span class="marquee-dot"></span></div><div class="marquee-item">Angel Live<span class="marquee-dot"></span>女性限定<span class="marquee-dot"></span>専属サポート<span class="marquee-dot"></span>報酬還元率100%<span class="marquee-dot"></span>TikTok Live<span class="marquee-dot"></span>安心・安全<span class="marquee-dot"></span></div></div></div>
+<section id="services">
+  <div class="sec-head r"><span class="sec-label">— サポート内容</span><h2 class="sec-title">充実<em>サポート</em></h2><p class="sec-sub">所属するすべてのライバーへ、これだけの手厚いサポートをご提供します。</p></div>
+  <div class="svc-grid">
+    <div class="svc-card r" style="transition-delay:.05s"><span class="svc-num">01</span><span class="svc-en">Revenue Share</span><h3 class="svc-title">報酬還元率100%</h3><p class="svc-body">稼いだ分はしっかり還元。業界最高水準の還元率で、あなたの努力が収入に直結します。</p></div>
+    <div class="svc-card r" style="transition-delay:.1s"><span class="svc-num">02</span><span class="svc-en">Dedicated Manager</span><h3 class="svc-title">専属マネージャー</h3><p class="svc-body">あなた専任のマネージャーが、キャリアプランから日々の悩みまで全力でサポート。一人じゃない安心感を。</p></div>
+    <div class="svc-card r" style="transition-delay:.15s"><span class="svc-num">03</span><span class="svc-en">Streaming Support</span><h3 class="svc-title">配信活動サポート</h3><p class="svc-body">企画・機材・スキル向上まで、配信に必要なすべてをプロが伴走。初心者でも安心してスタートできます。</p></div>
+    <div class="svc-card r" style="transition-delay:.2s"><span class="svc-num">04</span><span class="svc-en">Beauty Allowance</span><h3 class="svc-title">美容手当</h3><p class="svc-body">毎月の美容手当を支給。ヘア・メイク・スキンケアへの投資を会社がサポートし、配信映えする魅力を引き出します。</p></div>
+    <div class="svc-card r" style="transition-delay:.25s"><span class="svc-num">05</span><span class="svc-en">Legal Protection</span><h3 class="svc-title">ストーカー・誹謗中傷対策</h3><p class="svc-body">顧問弁護士による法的サポートと、アンチコメントの監視・ブロック代行。精神的な安全を守ります。</p></div>
+    <div class="svc-card r" style="transition-delay:.3s"><span class="svc-num">06</span><span class="svc-en">Tax Support</span><h3 class="svc-title">確定申告サポート</h3><p class="svc-body">複雑な税務処理も専門スタッフが丁寧にサポート。初めての確定申告でも安心していただけます。</p></div>
+    <div class="svc-card full r" style="transition-delay:.35s"><div><span class="svc-num">07</span><span class="svc-en">Business Matching</span><h3 class="svc-title">企業案件の優先紹介</h3></div><p class="svc-body" style="padding-top:1.5rem">提携企業からの案件を優先的にご紹介。配信収入に加えて、企業案件で収入アップのチャンスを積極的に創出します。</p></div>
+  </div>
+</section>
+
+<section id="pickup">
+  <div class="pk-head">
+    <div class="r">
+      <span class="pk-tag">— Pickup Creators</span>
+      <h2 class="pk-h">Pickup<em>クリエイター</em></h2>
+    </div>
+    <p class="pk-desc r" style="transition-delay:.1s">それぞれの個性が、<br>それぞれの輝きを放つ。</p>
+  </div>
+  <div class="pk-scroll">
+    <div class="pk-card"><img src="images/creator1.jpg" alt="Creator"><div class="pk-card-ov"></div></div>
+    <div class="pk-card"><img src="images/creator2.jpg" alt="Creator"><div class="pk-card-ov"></div></div>
+    <div class="pk-card"><img src="images/creator3.jpg" alt="Creator"><div class="pk-card-ov"></div></div>
+    <div class="pk-card"><img src="images/creator4.jpg" alt="Creator"><div class="pk-card-ov"></div></div>
+    <div class="pk-card"><img src="images/creator5.jpg" alt="Creator"><div class="pk-card-ov"></div></div>
+    <div class="pk-card"><img src="images/creator6.jpg" alt="Creator"><div class="pk-card-ov"></div></div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="faq-layout">
+    <div class="rl"><span class="sec-label">— Q &amp; A</span><h2 class="faq-title">よくある<em>ご質問</em></h2></div>
+    <div class="faq-list rr">
+      <div class="faq-item"><div class="faq-q"><span class="faq-ql">Q.</span><span class="faq-qt">未経験でも所属できますか？</span><div class="faq-tog">+</div></div><div class="faq-ans"><div class="faq-ans-in">はい、未経験の方を積極的に歓迎しています。配信の始め方から機材の選び方まで、専属マネージャーが一緒に考えます。</div></div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-ql">Q.</span><span class="faq-qt">初期費用はかかりますか？</span><div class="faq-tog">+</div></div><div class="faq-ans"><div class="faq-ans-in">初期費用は一切かかりません。入会金・月会費ゼロで、完全成果報酬型です。安心してご相談ください。</div></div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-ql">Q.</span><span class="faq-qt">副業・掛け持ちでの活動は可能ですか？</span><div class="faq-tog">+</div></div><div class="faq-ans"><div class="faq-ans-in">はい、副業・掛け持ちでの活動も可能です。本業や学業と両立しながら活動しているメンバーも多数います。</div></div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-ql">Q.</span><span class="faq-qt">収入はどのくらいになりますか？</span><div class="faq-tog">+</div></div><div class="faq-ans"><div class="faq-ans-in">活動頻度やスタイルによって異なりますが、副業として月3〜10万円、専業として月20万円以上を目指すメンバーもいます。</div></div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-ql">Q.</span><span class="faq-qt">プライバシーは守られますか？</span><div class="faq-tog">+</div></div><div class="faq-ans"><div class="faq-ans-in">個人情報の取り扱いには最大限の注意を払っています。活動名での活動が基本で、本名・住所等の公開は一切行いません。</div></div></div>
+    </div>
+  </div>
+</section>
+<section id="cta" class="r">
+  <span class="cta-tag">— JOIN US</span>
+  <h2 class="cta-title">あなたの挑戦を、<br>待っています。</h2>
+  <p class="cta-sub">まずは無料相談から。<br>あなたのペースで始められます。</p>
+  <a href="https://lin.ee/ONecpoi" target="_blank" class="btn-white" style="text-decoration:none;display:inline-block;">無料で応募・相談する</a>
+</section>
+<footer>
+  <div class="foot-logo">Angel Live</div>
+  
+  <p class="foot-copy">© 2025 Angel Live. All rights reserved.</p>
+</footer>
+<script>
+
+// ローダー
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hide');
+    // キャッチコピーアニメ
+    setTimeout(() => {
+      const c = document.getElementById('heroCatch');
+      if(c) c.classList.add('anim');
+    }, 400);
+  }, 2000);
+});
+const cur=document.getElementById('cur'),curR=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function a(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(a);})();
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
+const ham=document.getElementById('ham'),mob=document.getElementById('mobileMenu');
+ham.addEventListener('click',()=>{ham.classList.toggle('open');mob.classList.toggle('open');document.body.style.overflow=mob.classList.contains('open')?'hidden':'';});
+function closeMenu(){ham.classList.remove('open');mob.classList.remove('open');document.body.style.overflow='';}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}});},{threshold:.08});
+document.querySelectorAll('.r,.rl,.rr').forEach(el=>obs.observe(el));
+document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>{const it=q.closest('.faq-item'),op=it.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!op)it.classList.add('open');});});
+function tick(){const end=new Date('2026-06-30T23:59:59+09:00'),now=new Date(),d=end-now;if(d<=0){['cdD','cdH','cdM','cdS'].forEach(id=>document.getElementById(id).textContent='00');return;}document.getElementById('cdD').textContent=String(Math.floor(d/86400000)).padStart(2,'0');document.getElementById('cdH').textContent=String(Math.floor(d%86400000/3600000)).padStart(2,'0');document.getElementById('cdM').textContent=String(Math.floor(d%3600000/60000)).padStart(2,'0');document.getElementById('cdS').textContent=String(Math.floor(d%60000/1000)).padStart(2,'0');}
+tick();setInterval(tick,1000);
+</script>
+</body>
+</html>
