@@ -321,11 +321,6 @@ footer{padding:3rem 4rem;background:var(--ink);display:flex;justify-content:spac
 </head>
 <body>
 
-<div id="loader">
-  <div class="loader-logo">Angel Live</div>
-  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
-  <p class="loader-tagline">Women's Live Streamer Agency</p>
-</div>
 <div id="cur"></div><div id="cur-r"></div>
 <div class="mobile-menu" id="mobileMenu">
   <a href="#about" onclick="closeMenu()">Angel Liveについて</a>
@@ -344,7 +339,7 @@ footer{padding:3rem 4rem;background:var(--ink);display:flex;justify-content:spac
   <button class="hamburger" id="ham"><span></span><span></span><span></span></button>
 </nav>
 <section id="hero">
-  <div class="hero-img"><img src="images/hero.jpg" alt="Angel Live"></div>
+  <div class="hero-img"><img src="hero.jpeg" alt="Angel Live"></div>
   <div class="hero-overlay"></div><div class="hero-overlay-bottom"></div>
   <div class="hero-content">
     
@@ -414,12 +409,12 @@ footer{padding:3rem 4rem;background:var(--ink);display:flex;justify-content:spac
     <p class="pk-desc r" style="transition-delay:.1s">それぞれの個性が、<br>それぞれの輝きを放つ。</p>
   </div>
   <div class="pk-scroll">
-    <div class="pk-card"><img src="images/creator1.jpg" alt="Creator"><div class="pk-card-ov"></div></div>
-    <div class="pk-card"><img src="images/creator2.jpg" alt="Creator"><div class="pk-card-ov"></div></div>
-    <div class="pk-card"><img src="images/creator3.jpg" alt="Creator"><div class="pk-card-ov"></div></div>
-    <div class="pk-card"><img src="images/creator4.jpg" alt="Creator"><div class="pk-card-ov"></div></div>
-    <div class="pk-card"><img src="images/creator5.jpg" alt="Creator"><div class="pk-card-ov"></div></div>
-    <div class="pk-card"><img src="images/creator6.jpg" alt="Creator"><div class="pk-card-ov"></div></div>
+    <div class="pk-card"><img src="creator1.jpeg" alt="Creator"><div class="pk-card-ov"></div></div>
+    <div class="pk-card"><img src="creator2.jpeg" alt="Creator"><div class="pk-card-ov"></div></div>
+    <div class="pk-card"><img src="creator3.jpeg" alt="Creator"><div class="pk-card-ov"></div></div>
+    <div class="pk-card"><img src="creator4.jpeg" alt="Creator"><div class="pk-card-ov"></div></div>
+    <div class="pk-card"><img src="creator5.jpeg" alt="Creator"><div class="pk-card-ov"></div></div>
+    <div class="pk-card"><img src="creator6.jpeg" alt="Creator"><div class="pk-card-ov"></div></div>
   </div>
 </section>
 
@@ -448,16 +443,12 @@ footer{padding:3rem 4rem;background:var(--ink);display:flex;justify-content:spac
 </footer>
 <script>
 
-// ローダー
+// キャッチコピーアニメ（ローダーなし版）
 window.addEventListener('load', () => {
   setTimeout(() => {
-    document.getElementById('loader').classList.add('hide');
-    // キャッチコピーアニメ
-    setTimeout(() => {
-      const c = document.getElementById('heroCatch');
-      if(c) c.classList.add('anim');
-    }, 400);
-  }, 2000);
+    const c = document.getElementById('heroCatch');
+    if(c) c.classList.add('anim');
+  }, 300);
 });
 const cur=document.getElementById('cur'),curR=document.getElementById('cur-r');
 let mx=0,my=0,rx=0,ry=0;
