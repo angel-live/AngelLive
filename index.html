@@ -363,11 +363,11 @@ footer{padding:3rem 4rem;background:var(--ink);display:flex;justify-content:spac
 </section>
 <section id="campaign" class="r">
   <div class="campaign-wrap">
-    <div class="campaign-ring"><span class="campaign-ring-en">Campaign</span><div class="campaign-ring-date">6/1<br>〜<br>6/30</div></div>
+    <div class="campaign-ring"><span class="campaign-ring-en">Campaign</span><div class="campaign-ring-date">8/1<br>〜<br>8/31</div></div>
     <div class="campaign-main">
       <span class="campaign-tag">— 期間限定キャンペーン</span>
-      <h2 class="campaign-title">6月<em>所属キャンペーン</em></h2>
-      <p class="campaign-desc">2025年6月1日〜6月30日の間にご入所いただいた方限定で、<br>特典として美容品プレゼントをご用意しています。<br>詳細は面談にてご説明いたします。</p>
+      <h2 class="campaign-title">8月<em>所属キャンペーン</em></h2>
+      <p class="campaign-desc">2026年8月1日〜8月31日の間にご入所いただいた方限定で、<br><strong style="color:#C9A07F;font-weight:400;">先着20名様</strong>に豪華特典をプレゼント。<br>詳細は面談にてご説明いたします。</p>
       <div class="campaign-cd">
         <div class="cd-unit"><span class="cd-num" id="cdD">--</span><span class="cd-lbl">Days</span></div>
         <div class="cd-unit"><span class="cd-num" id="cdH">--</span><span class="cd-lbl">Hours</span></div>
@@ -461,7 +461,7 @@ function closeMenu(){ham.classList.remove('open');mob.classList.remove('open');d
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}});},{threshold:.08});
 document.querySelectorAll('.r,.rl,.rr').forEach(el=>obs.observe(el));
 document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>{const it=q.closest('.faq-item'),op=it.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!op)it.classList.add('open');});});
-function tick(){const end=new Date('2026-06-30T23:59:59+09:00'),now=new Date(),d=end-now;if(d<=0){['cdD','cdH','cdM','cdS'].forEach(id=>document.getElementById(id).textContent='00');return;}document.getElementById('cdD').textContent=String(Math.floor(d/86400000)).padStart(2,'0');document.getElementById('cdH').textContent=String(Math.floor(d%86400000/3600000)).padStart(2,'0');document.getElementById('cdM').textContent=String(Math.floor(d%3600000/60000)).padStart(2,'0');document.getElementById('cdS').textContent=String(Math.floor(d%60000/1000)).padStart(2,'0');}
+function tick(){const end=new Date('2026-08-31T23:59:59+09:00'),now=new Date(),d=end-now;if(d<=0){['cdD','cdH','cdM','cdS'].forEach(id=>document.getElementById(id).textContent='00');return;}document.getElementById('cdD').textContent=String(Math.floor(d/86400000)).padStart(2,'0');document.getElementById('cdH').textContent=String(Math.floor(d%86400000/3600000)).padStart(2,'0');document.getElementById('cdM').textContent=String(Math.floor(d%3600000/60000)).padStart(2,'0');document.getElementById('cdS').textContent=String(Math.floor(d%60000/1000)).padStart(2,'0');}
 tick();setInterval(tick,1000);
 </script>
 </body>
