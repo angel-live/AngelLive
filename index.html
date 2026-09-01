@@ -61,22 +61,22 @@ nav.scrolled .hamburger span{background:var(--ink);}
 .btn-ghost-white:hover{border-color:rgba(255,255,255,.85);color:var(--white);}
 .hero-scroll{position:absolute;right:3.5rem;bottom:3rem;writing-mode:vertical-rl;font-size:.5rem;letter-spacing:.3em;color:rgba(255,255,255,.38);display:flex;align-items:center;gap:.8rem;opacity:0;animation:fadeUp .8s 1.6s forwards;}
 .hero-scroll::after{content:'';width:1px;height:2.5rem;background:rgba(255,255,255,.28);}
-#campaign{background:var(--ink);padding:5rem 4rem;position:relative;overflow:hidden;}
-#campaign::before{content:'CAMPAIGN';position:absolute;font-family:'Cormorant Garamond',serif;font-size:15vw;font-weight:300;font-style:italic;color:rgba(255,255,255,.025);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;}
-.campaign-wrap{display:grid;grid-template-columns:120px 1fr auto;align-items:center;gap:4rem;max-width:1100px;margin:0 auto;}
-.campaign-ring{width:110px;height:110px;border:1px solid rgba(201,160,127,.3);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;flex-shrink:0;}
-.campaign-ring-en{font-size:.46rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(201,160,127,.55);}
-.campaign-ring-date{font-family:'DM Serif Display',serif;font-size:1.05rem;font-weight:400;color:#C9A07F;letter-spacing:.05em;line-height:1.4;text-align:center;}
-.campaign-tag{font-size:.54rem;letter-spacing:.4em;text-transform:uppercase;color:#C9A07F;opacity:.65;margin-bottom:.9rem;display:block;}
-.campaign-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,2.5vw,2.2rem);font-weight:300;color:var(--white);line-height:1.3;margin-bottom:.8rem;letter-spacing:.05em;}
-.campaign-title em{font-style:italic;color:#C9A07F;}
-.campaign-desc{font-size:.72rem;font-weight:200;color:rgba(255,255,255,.4);line-height:2;letter-spacing:.06em;margin-bottom:1.5rem;}
-.campaign-cd{display:flex;gap:1.5rem;}
-.cd-unit{text-align:center;}
-.cd-num{font-family:'DM Serif Display',serif;font-size:2rem;font-weight:400;color:var(--white);line-height:1;display:block;letter-spacing:.02em;}
-.cd-lbl{font-size:.44rem;letter-spacing:.2em;color:rgba(255,255,255,.25);text-transform:uppercase;margin-top:2px;display:block;}
-.campaign-btn{font-size:.58rem;letter-spacing:.2em;padding:1rem 2.2rem;background:none;border:1px solid rgba(201,160,127,.4);color:#C9A07F;cursor:pointer;font-family:'Noto Sans JP',sans-serif;font-weight:300;white-space:nowrap;transition:all .25s;align-self:center;}
-.campaign-btn:hover{background:#C9A07F;color:var(--ink);}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #about{padding:9rem 4rem;background:var(--white);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
 .sec-label{font-size:.56rem;letter-spacing:.4em;text-transform:uppercase;color:var(--rose);margin-bottom:1.3rem;display:block;}
 .about-big{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:300;line-height:.95;margin-bottom:1.8rem;}
@@ -144,7 +144,7 @@ footer{padding:3rem 4rem;background:var(--ink);display:flex;justify-content:spac
 @media(max-width:768px){
   nav{padding:1rem 1.5rem;}.nav-links,.nav-cta{display:none;}.hamburger{display:flex;}
   .hero-content{padding:0 1.5rem 5rem;max-width:100%;}.hero-scroll{display:none;}
-  #campaign{padding:3.5rem 1.5rem;}.campaign-wrap{grid-template-columns:1fr;gap:2rem;text-align:center;}.campaign-ring{display:none;}.campaign-cd{justify-content:center;}.campaign-btn{width:100%;margin-top:.5rem;}
+  
   #about{padding:5rem 1.5rem;grid-template-columns:1fr;gap:3rem;}.about-right{flex-direction:row;flex-wrap:wrap;gap:1.5rem;}.about-stat{flex:1;min-width:110px;}
   #services{padding:5rem 1.5rem;}.svc-grid{grid-template-columns:1fr;}.svc-card.full{grid-column:auto;grid-template-columns:1fr;}
   #faq{padding:5rem 1.5rem;}.faq-layout{grid-template-columns:1fr;gap:2.5rem;}
@@ -361,23 +361,6 @@ footer{padding:3rem 4rem;background:var(--ink);display:flex;justify-content:spac
   <div class="hero-deco-line"></div>
 <p class="hero-scroll">SCROLL</p>
 </section>
-<section id="campaign" class="r">
-  <div class="campaign-wrap">
-    <div class="campaign-ring"><span class="campaign-ring-en">Campaign</span><div class="campaign-ring-date">8/1<br>〜<br>8/31</div></div>
-    <div class="campaign-main">
-      <span class="campaign-tag">— 期間限定キャンペーン</span>
-      <h2 class="campaign-title">8月<em>所属キャンペーン</em></h2>
-      <p class="campaign-desc">2026年8月1日〜8月31日の間にご入所いただいた方限定で、<br><strong style="color:#C9A07F;font-weight:400;">先着20名様</strong>に豪華特典をプレゼント。<br>詳細は面談にてご説明いたします。</p>
-      <div class="campaign-cd">
-        <div class="cd-unit"><span class="cd-num" id="cdD">--</span><span class="cd-lbl">Days</span></div>
-        <div class="cd-unit"><span class="cd-num" id="cdH">--</span><span class="cd-lbl">Hours</span></div>
-        <div class="cd-unit"><span class="cd-num" id="cdM">--</span><span class="cd-lbl">Min</span></div>
-        <div class="cd-unit"><span class="cd-num" id="cdS">--</span><span class="cd-lbl">Sec</span></div>
-      </div>
-    </div>
-    <a href="https://lin.ee/ONecpoi" target="_blank" class="campaign-btn" style="text-decoration:none;display:inline-block;">今すぐ応募する →</a>
-  </div>
-</section>
 <section id="about">
   <div class="rl"><span class="sec-label">— Angel Liveについて</span><h2 class="about-big">女性限定<br><em>ライバー</em><br>事務所</h2><p class="about-body">Angel Liveは、女性に特化したTikTok公認ライバー事務所です。あなたの配信活動を、専属チームが全力でサポートします。</p></div>
   <div class="about-right rr">
@@ -461,8 +444,7 @@ function closeMenu(){ham.classList.remove('open');mob.classList.remove('open');d
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}});},{threshold:.08});
 document.querySelectorAll('.r,.rl,.rr').forEach(el=>obs.observe(el));
 document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>{const it=q.closest('.faq-item'),op=it.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!op)it.classList.add('open');});});
-function tick(){const end=new Date('2026-08-31T23:59:59+09:00'),now=new Date(),d=end-now;if(d<=0){['cdD','cdH','cdM','cdS'].forEach(id=>document.getElementById(id).textContent='00');return;}document.getElementById('cdD').textContent=String(Math.floor(d/86400000)).padStart(2,'0');document.getElementById('cdH').textContent=String(Math.floor(d%86400000/3600000)).padStart(2,'0');document.getElementById('cdM').textContent=String(Math.floor(d%3600000/60000)).padStart(2,'0');document.getElementById('cdS').textContent=String(Math.floor(d%60000/1000)).padStart(2,'0');}
-tick();setInterval(tick,1000);
+
 </script>
 </body>
 </html>
